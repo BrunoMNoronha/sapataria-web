@@ -15,11 +15,213 @@ datasource db {
 }
 
 // ----------------------------------------------------------------------------
-// Models de negócio serão adicionados aqui em fases futuras:
-//   - Cliente
-//   - OrdemDeServico
-//   - Item
-//   - Servico
-//   - Pagamento
-//   etc.
+// Enums do Sistema da Sapataria
 // ----------------------------------------------------------------------------
+
+enum Perfil {
+  ADMIN
+  ATENDENTE
+  PRODUCAO
+  FINANCEIRO
+}
+
+enum StatusOrdem {
+  RECEBIDA
+  EM_AVALIACAO
+  AGUARDANDO_AUTORIZACAO
+  EM_PRODUCAO
+  PRONTA_PARA_RETIRADA
+  ENTREGUE
+  CANCELADA
+}
+
+enum TipoPagamento {
+  SINAL
+  PARCIAL
+  FINAL
+  ESTORNO
+}
+
+enum MetodoPagamento {
+  DINHEIRO
+  PIX
+  DEBITO
+  CREDITO
+  TRANSFERENCIA
+  CORTESIA
+}
+
+enum StatusServico {
+  PENDENTE
+  EM_EXECUCAO
+  CONCLUIDO
+  CANCELADO
+}
+
+enum EtapaFoto {
+  ENTRADA
+  ANDAMENTO
+  CONCLUSAO
+}
+
+// ----------------------------------------------------------------------------
+// Entidades em Português
+// ----------------------------------------------------------------------------
+
+model Usuario {
+  id                String             @id @default(uuid())
+  email             String             @unique
+  senha             String
+  nome              String
+  perfis            Perfil[]           @default([ATENDENTE])
+  dataCriacao       DateTime           @default(now())
+  dataAtualizacao   DateTime           @updatedAt
+
+  ordensCriadas     OrdemServico[]     @relation("CriadoPor")
+  ordensEntregues   OrdemServico[]     @relation("EntreguePor")
+  pagamentos        Pagamento[]
+  logsAuditoria     LogAuditoria[]
+  registrosGarantia RegistroGarantia[]
+  fotosCadastradas  FotoItem[]
+}
+
+model Cliente {
+  id              String         @id @default(uuid())
+  nome            String
+  telefone        String         // WhatsApp/Telefone (obrigatório)
+  email           String?
+  cpf             String?        // Opcional no MVP
+  endereco        String?
+  observacoes     String?
+  dataCriacao     DateTime       @default(now())
+  dataAtualizacao DateTime       @updatedAt
+  ordensServico   OrdemServico[]
+
+  @@index([nome])
+  @@index([telefone])
+}
+
+model OrdemServico {
+  id               String             @id @default(uuid())
+  numero           String             @unique // Número da OS digitado pelo usuário (Input tipo texto)
+  clienteId        String
+  status           StatusOrdem        @default(RECEBIDA)
+  criadoPorId      String
+  entreguePorId    String?
+  prazoPrevisto    DateTime
+  observacoes      String?
+  dataCriacao      DateTime           @default(now())
+  dataAtualizacao  DateTime           @updatedAt
+
+  cliente          Cliente            @relation(fields: [clienteId], references: [id])
+  criadoPor        Usuario            @relation("CriadoPor", fields: [criadoPorId], references: [id])
+  entreguePor      Usuario?           @relation("EntreguePor", fields: [entreguePorId], references: [id])
+  itens            ItemOrdemServico[]
+  pagamentos       Pagamento[]
+  logsAuditoria    LogAuditoria[]
+  registrosGarantia RegistroGarantia[]
+
+  @@index([status])
+  @@index([clienteId])
+}
+
+model ItemOrdemServico {
+  id               String        @id @default(uuid())
+  ordemServicoId   String
+  tipo             String        // Bolsa, sapato, mala, tênis, etc.
+  descricao        String
+  problemaRelatado String
+  cor              String?
+  marca            String?
+  material         String?
+  acessorios       String?       // Acessórios recebidos (ex: alça, fivelas)
+  dataCriacao      DateTime      @default(now())
+  dataAtualizacao  DateTime      @updatedAt
+
+  ordemServico     OrdemServico  @relation(fields: [ordemServicoId], references: [id], onDelete: Cascade)
+  servicos         ServicoItem[]
+  fotos            FotoItem[]
+
+  @@index([ordemServicoId])
+}
+
+model ServicoItem {
+  id               String        @id @default(uuid())
+  itemId           String
+  descricao        String        // Troca de sola, costura, colagem, higienização
+  preco            Decimal       @db.Decimal(10, 2)
+  prazoPrevisto    DateTime
+  status           StatusServico @default(PENDENTE)
+  nomeTecnico      String?       // Técnico responsável (opcional)
+  dataCriacao      DateTime      @default(now())
+  dataAtualizacao  DateTime      @updatedAt
+
+  item             ItemOrdemServico @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([itemId])
+  @@index([status])
+}
+
+model Pagamento {
+  id             String          @id @default(uuid())
+  ordemServicoId String
+  valor          Decimal         @db.Decimal(10, 2)
+  tipo           TipoPagamento
+  metodo         MetodoPagamento
+  recebidoPorId  String
+  observacoes    String?
+  dataCriacao    DateTime        @default(now())
+
+  ordemServico   OrdemServico    @relation(fields: [ordemServicoId], references: [id])
+  recebidoPor    Usuario         @relation(fields: [recebidoPorId], references: [id])
+
+  @@index([ordemServicoId])
+}
+
+model FotoItem {
+  id              String           @id @default(uuid())
+  itemId          String
+  url             String
+  etapa           EtapaFoto        @default(ENTRADA)
+  cadastradoPorId String
+  dataCriacao     DateTime         @default(now())
+
+  item            ItemOrdemServico @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  cadastradoPor   Usuario          @relation(fields: [cadastradoPorId], references: [id])
+
+  @@index([itemId])
+}
+
+model LogAuditoria {
+  id             String        @id @default(uuid())
+  ordemServicoId String?
+  usuarioId      String
+  tipoAcao       String        // ex: "CRIAR_OS", "ALTERAR_STATUS", "PAGAMENTO", "ENTREGA_EXCEP"
+  detalhes       String        // Detalhamento amigável da alteração
+  justificativa  String?       // Obrigatória para exceções e ações críticas
+  dataCriacao    DateTime      @default(now())
+
+  ordemServico   OrdemServico? @relation(fields: [ordemServicoId], references: [id])
+  usuario        Usuario       @relation(fields: [usuarioId], references: [id])
+
+  @@index([ordemServicoId])
+  @@index([usuarioId])
+}
+
+model RegistroGarantia {
+  id                     String       @id @default(uuid())
+  ordemServicoOriginalId String
+  ordemServicoGarantiaId String?      @unique // Nova OS do tipo garantia vinculada
+  relatoCliente          String
+  avaliacaoOficina       String
+  solucaoAplicada        String?
+  criadoPorId            String
+  dataCriacao            DateTime     @default(now())
+  dataAtualizacao        DateTime     @updatedAt
+
+  ordemOriginal          OrdemServico @relation(fields: [ordemServicoOriginalId], references: [id])
+  criadoPor              Usuario      @relation(fields: [criadoPorId], references: [id])
+
+  @@index([ordemServicoOriginalId])
+}
+
