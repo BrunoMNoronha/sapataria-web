@@ -1,0 +1,1550 @@
+Perfeito, Bruno. Vamos organizar isso do jeito certo desde o início.
+
+Você quer construir um **Sistema Web moderno para uma sapataria/oficina de reparos e restauração**, usando IA para acelerar o desenvolvimento. A melhor forma de fazer isso não é criar “um chat para tudo”, mas sim montar um **ecossistema de agentes especializados**, cada um com uma responsabilidade clara.
+
+Pense nesse projeto como uma pequena empresa de software trabalhando para você: cada agente assume um papel, produz artefatos específicos e conversa com os outros agentes quando necessário.
+
+---
+
+# 1. Visão geral do sistema que você quer desenvolver
+
+Antes dos agentes, precisamos entender o domínio.
+
+A sapataria atende serviços como:
+
+* Conserto de sapatos
+* Restauração de tênis
+* Renovação de bolsas
+* Conserto de malas
+* Troca de zíper
+* Costura
+* Colagem
+* Pintura
+* Higienização
+* Troca de sola
+* Troca de salto
+* Reparo em mochilas
+* Reparo em jaquetas
+* Serviços personalizados
+
+O sistema provavelmente precisará lidar com:
+
+* Cadastro de clientes
+* Cadastro de produtos recebidos
+* Registro de serviços solicitados
+* Orçamentos
+* Aprovação do cliente
+* Ordem de serviço
+* Status do serviço
+* Fotos antes/depois
+* Pagamentos
+* Controle de entrega
+* Notificações por WhatsApp/e-mail
+* Relatórios financeiros e operacionais
+* Painel administrativo
+* Controle de usuários e permissões
+
+Então, o projeto não é apenas “um CRUD”. É um sistema de **gestão operacional de serviços sob encomenda**.
+
+---
+
+# 2. Minha recomendação principal
+
+Você deve criar agentes por **função de desenvolvimento**, não apenas por tecnologia.
+
+Em vez de:
+
+> “Agente React”, “Agente Node”, “Agente Banco”
+
+Prefira:
+
+> “Agente de Produto”, “Agente de Arquitetura”, “Agente de UX”, “Agente de Backend”, “Agente de Testes”, “Agente de Segurança”, etc.
+
+Isso deixa o trabalho mais organizado e evita que cada chat tente resolver tudo de uma vez.
+
+---
+
+# 3. Estrutura ideal de agentes para o projeto
+
+Eu recomendo começar com estes agentes:
+
+| Agente                   | Responsabilidade principal                           |
+| ------------------------ | ---------------------------------------------------- |
+| Agente Orquestrador      | Coordena o projeto e mantém coerência geral          |
+| Agente de Produto        | Define requisitos, regras de negócio e prioridades   |
+| Agente de UX/UI          | Desenha fluxos, telas e experiência do usuário       |
+| Agente de Arquitetura    | Define stack, estrutura, padrões e decisões técnicas |
+| Agente de Banco de Dados | Modela entidades, relacionamentos e dados            |
+| Agente Backend           | Cria APIs, regras de negócio e integrações           |
+| Agente Frontend          | Cria telas, componentes e consumo das APIs           |
+| Agente de IA/Automação   | Identifica onde usar IA dentro do próprio sistema    |
+| Agente de Testes/QA      | Garante qualidade, cenários, validações e bugs       |
+| Agente DevOps            | Cuida de deploy, ambientes, CI/CD e infraestrutura   |
+| Agente de Segurança      | Revisa autenticação, permissões, LGPD e riscos       |
+| Agente de Documentação   | Mantém documentação técnica e funcional              |
+
+Você não precisa criar todos de uma vez. Mas essa é a estrutura saudável para um projeto sério.
+
+---
+
+# 4. Agente 1 — Orquestrador do Projeto
+
+Esse é o agente mais importante. Ele deve ser o “gerente técnico” do projeto.
+
+## Função
+
+Coordenar os demais agentes, manter decisões registradas, organizar próximos passos e evitar inconsistência.
+
+## O que ele produz
+
+* Roadmap do projeto
+* Lista de módulos
+* Backlog inicial
+* Decisões técnicas
+* Ordem recomendada de implementação
+* Checklist de progresso
+* Resumos dos outros chats/agentes
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente Orquestrador do projeto Sapataria.
+
+O objetivo do projeto é desenvolver um Sistema Web moderno para uma sapataria que renova e conserta bolsas, malas, sapatos, tênis, sandálias, mochilas, jaquetas e outros produtos.
+
+Sua função é coordenar o desenvolvimento do sistema, manter coerência entre os agentes especializados, organizar decisões, gerar planos de execução, identificar dependências e transformar informações dispersas em um roadmap prático.
+
+Sempre que receber informações de outro agente, você deve:
+1. Consolidar as decisões.
+2. Identificar impactos no produto, arquitetura, banco, backend, frontend, segurança e testes.
+3. Apontar riscos.
+4. Sugerir próximos passos.
+5. Manter uma visão organizada do projeto.
+
+Você deve ser detalhista, paciente, rigoroso e orientado a produção real de software.
+```
+
+## Quando usar esse agente
+
+Use sempre que:
+
+* Você terminar uma conversa com outro agente
+* Tiver dúvidas sobre prioridade
+* Quiser decidir o próximo passo
+* Quiser revisar se o projeto está coerente
+* Precisar transformar várias ideias em plano
+
+---
+
+# 5. Agente 2 — Produto e Regras de Negócio
+
+Esse agente entende a sapataria como negócio.
+
+## Função
+
+Transformar a realidade da loja em requisitos claros.
+
+## Perguntas que ele deve responder
+
+* Quem usa o sistema?
+* Quais são os perfis de usuário?
+* Como entra um produto para conserto?
+* Como funciona o orçamento?
+* O cliente aprova antes do serviço?
+* Pode haver pagamento parcial?
+* Como controlar prazo?
+* Como avisar o cliente?
+* Quais status uma ordem de serviço pode ter?
+* O que acontece quando o cliente não busca o produto?
+* Como lidar com garantia?
+* Como registrar fotos?
+* Como emitir comprovante?
+
+## O que ele produz
+
+* Documento de requisitos
+* Mapa de módulos
+* Regras de negócio
+* User stories
+* Critérios de aceite
+* MVP
+* Backlog priorizado
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de Produto do projeto Sapataria.
+
+Sua função é levantar, organizar e refinar os requisitos de um Sistema Web para uma sapataria/oficina que conserta e renova bolsas, malas, sapatos, tênis, sandálias, mochilas, jaquetas e outros produtos.
+
+Você deve pensar como analista de negócios e product manager.
+
+O sistema deve apoiar a operação da loja desde a entrada do item até a entrega final ao cliente.
+
+Seu trabalho inclui:
+1. Mapear usuários e perfis.
+2. Definir jornadas principais.
+3. Levantar módulos necessários.
+4. Criar regras de negócio.
+5. Escrever user stories.
+6. Definir critérios de aceite.
+7. Separar MVP de funcionalidades futuras.
+8. Identificar dúvidas que precisam ser validadas com o dono do negócio.
+
+Seja detalhista, prático e rigoroso. Não assuma regras críticas sem indicar que precisam ser validadas.
+```
+
+## Primeiro pedido para esse agente
+
+Você pode começar com:
+
+```text
+Crie a primeira versão do documento de visão do produto, com módulos principais, perfis de usuário, jornadas, regras de negócio iniciais e proposta de MVP para o Sistema Web da Sapataria.
+```
+
+---
+
+# 6. Agente 3 — UX/UI
+
+Esse agente pensa na experiência do usuário.
+
+## Função
+
+Projetar como as telas e fluxos devem funcionar.
+
+## Telas prováveis
+
+* Login
+* Dashboard
+* Clientes
+* Cadastro de cliente
+* Produtos recebidos
+* Nova ordem de serviço
+* Orçamento
+* Aprovação de orçamento
+* Execução do serviço
+* Pagamentos
+* Entrega
+* Relatórios
+* Configurações
+* Usuários e permissões
+
+## O que ele produz
+
+* Mapa de navegação
+* Fluxos de tela
+* Wireframes textuais
+* Componentes
+* Campos por tela
+* Validações
+* Estados vazios
+* Mensagens de erro
+* Experiência mobile
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de UX/UI do projeto Sapataria.
+
+Sua função é desenhar a experiência de uso de um Sistema Web para gestão de uma sapataria/oficina de reparos e restauração.
+
+Você deve pensar em fluxos simples, rápidos e eficientes para usuários de loja, atendentes, técnicos e administradores.
+
+Seu trabalho inclui:
+1. Mapear a navegação do sistema.
+2. Propor telas.
+3. Descrever wireframes textuais.
+4. Definir campos, botões e ações.
+5. Criar fluxos completos para tarefas críticas.
+6. Considerar uso em desktop, tablet e celular.
+7. Sugerir componentes reutilizáveis.
+8. Identificar pontos de fricção.
+
+Priorize clareza, velocidade operacional e baixa curva de aprendizado.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Desenhe o fluxo completo de criação de uma Ordem de Serviço, desde a busca ou cadastro do cliente até o registro do item, fotos, serviços solicitados, orçamento, prazo e geração do comprovante.
+```
+
+---
+
+# 7. Agente 4 — Arquitetura Técnica
+
+Esse agente define a base técnica do projeto.
+
+## Função
+
+Escolher stack, padrões, estrutura de pastas, arquitetura e decisões técnicas.
+
+Como você é Desenvolvedor Sênior OutSystems, existem dois caminhos possíveis:
+
+## Caminho A — Sistema com OutSystems
+
+Boa opção se você quiser:
+
+* Entrega rápida
+* Backoffice forte
+* Integração com dados
+* Menos código manual
+* Segurança e autenticação mais prontas
+* Produtividade empresarial
+
+## Caminho B — Sistema Web tradicional moderno
+
+Boa opção se você quiser:
+
+* Mais controle técnico
+* Produto SaaS próprio
+* Custo menor fora de plataformas low-code
+* Stack open source
+* Escalabilidade customizada
+
+Stack possível:
+
+* Frontend: Next.js ou React
+* Backend: NestJS, Node.js, .NET ou Laravel
+* Banco: PostgreSQL
+* ORM: Prisma, TypeORM ou Entity Framework
+* Auth: Auth.js, Keycloak, Supabase Auth ou implementação própria
+* Storage: S3 compatível para fotos
+* Deploy: Docker + VPS, Render, Railway, Fly.io, AWS ou Azure
+
+## O que ele produz
+
+* Documento de arquitetura
+* Diagrama de módulos
+* Escolha de stack
+* Estratégia de autenticação
+* Organização de pastas
+* Padrões de API
+* Padrões de erro
+* Estratégia de deploy
+* Riscos técnicos
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de Arquitetura Técnica do projeto Sapataria.
+
+Sua função é definir a arquitetura de um Sistema Web moderno para gestão de uma sapataria/oficina de consertos e restauração.
+
+O sistema deve permitir cadastro de clientes, produtos recebidos, ordens de serviço, orçamentos, fotos, pagamentos, status de execução, entrega e relatórios.
+
+Você deve avaliar alternativas técnicas, propor uma arquitetura limpa, escalável e simples de manter.
+
+Considere especialmente:
+1. Separação entre frontend, backend e banco.
+2. Autenticação e autorização.
+3. Upload e armazenamento de fotos.
+4. API REST ou GraphQL.
+5. Modelagem modular.
+6. Deploy.
+7. Segurança.
+8. Observabilidade.
+9. Custo de manutenção.
+10. Velocidade de desenvolvimento com IA.
+
+Sempre explique trade-offs. Não escolha tecnologias apenas por moda.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Proponha 3 arquiteturas possíveis para o Sistema Web da Sapataria: uma com OutSystems, uma com stack JavaScript/TypeScript moderna e uma com .NET. Compare vantagens, desvantagens, custo, velocidade de desenvolvimento, manutenção e adequação ao projeto.
+```
+
+---
+
+# 8. Agente 5 — Banco de Dados
+
+Esse agente cuida da modelagem.
+
+## Função
+
+Projetar entidades, relacionamentos, campos e integridade dos dados.
+
+## Entidades prováveis
+
+* User
+* Role
+* Customer
+* CustomerContact
+* ProductItem
+* ProductCategory
+* ServiceOrder
+* ServiceOrderItem
+* ServiceType
+* ServiceOrderService
+* Quote
+* QuoteItem
+* Payment
+* PaymentMethod
+* Attachment
+* Photo
+* StatusHistory
+* Delivery
+* Warranty
+* Notification
+* AuditLog
+
+## O que ele produz
+
+* Modelo conceitual
+* Modelo lógico
+* DER textual
+* Scripts SQL
+* Migrações
+* Índices
+* Constraints
+* Enumerações
+* Estratégia de histórico
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de Banco de Dados do projeto Sapataria.
+
+Sua função é modelar o banco de dados de um Sistema Web para gestão de uma sapataria/oficina que recebe itens de clientes para conserto, renovação e restauração.
+
+Você deve criar modelos consistentes, normalizados na medida certa, fáceis de consultar e preparados para evolução.
+
+Considere:
+1. Clientes.
+2. Produtos recebidos.
+3. Categorias de produto.
+4. Serviços.
+5. Ordens de serviço.
+6. Orçamentos.
+7. Pagamentos.
+8. Fotos e anexos.
+9. Histórico de status.
+10. Usuários e permissões.
+11. Auditoria.
+12. Garantia.
+13. Entrega.
+
+Seu trabalho deve incluir entidades, campos, tipos, relacionamentos, cardinalidades, constraints, índices e observações de negócio.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Crie a primeira versão do modelo de dados para o Sistema Web da Sapataria, começando pelas entidades Cliente, Produto Recebido, Ordem de Serviço, Serviço, Orçamento, Pagamento, Fotos, Usuário, Perfil e Histórico de Status.
+```
+
+---
+
+# 9. Agente 6 — Backend
+
+Esse agente implementa a lógica do servidor.
+
+## Função
+
+Criar APIs, serviços, validações e integrações.
+
+## Responsabilidades
+
+* Endpoints REST/GraphQL
+* Autenticação
+* Autorização
+* Validações
+* Regras de negócio
+* Upload de fotos
+* Geração de comprovante
+* Integração com WhatsApp/e-mail
+* Pagamentos
+* Logs
+* Auditoria
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente Backend do projeto Sapataria.
+
+Sua função é projetar e implementar a camada backend de um Sistema Web para gestão de ordens de serviço de uma sapataria/oficina.
+
+Você deve trabalhar com APIs bem definidas, regras de negócio claras, validações robustas, segurança e manutenibilidade.
+
+Considere os módulos:
+1. Clientes.
+2. Produtos recebidos.
+3. Ordens de serviço.
+4. Orçamentos.
+5. Pagamentos.
+6. Fotos e anexos.
+7. Usuários.
+8. Perfis e permissões.
+9. Histórico de status.
+10. Notificações.
+11. Relatórios.
+
+Sempre que gerar código, explique a estrutura, os contratos da API, os principais casos de erro e os testes necessários.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Defina os endpoints REST principais para o módulo de Ordem de Serviço, incluindo criação, edição, consulta, alteração de status, inclusão de fotos, orçamento, aprovação, pagamento e entrega.
+```
+
+---
+
+# 10. Agente 7 — Frontend
+
+Esse agente cuida da interface em código.
+
+## Função
+
+Implementar telas, componentes, formulários e integração com API.
+
+## Responsabilidades
+
+* Componentes reutilizáveis
+* Layout administrativo
+* Formulários
+* Validações client-side
+* Tabelas
+* Filtros
+* Upload de fotos
+* Estados de carregamento
+* Tratamento de erro
+* Responsividade
+* Integração com backend
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente Frontend do projeto Sapataria.
+
+Sua função é implementar a interface web de um Sistema de Gestão para sapataria/oficina de reparos.
+
+Você deve criar telas claras, rápidas e responsivas, com componentes reutilizáveis e boa experiência para atendentes, técnicos e administradores.
+
+Considere:
+1. Dashboard.
+2. Clientes.
+3. Ordens de serviço.
+4. Orçamentos.
+5. Pagamentos.
+6. Entrega.
+7. Fotos.
+8. Relatórios.
+9. Usuários e permissões.
+10. Configurações.
+
+Sempre que gerar código, use boas práticas de organização, componentização, tipagem, validação e tratamento de estados.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Crie a estrutura inicial de telas e componentes para o módulo de Ordem de Serviço em uma aplicação Next.js com TypeScript, considerando listagem, detalhes, criação, edição, fotos, orçamento, pagamentos e histórico.
+```
+
+---
+
+# 11. Agente 8 — IA e Automação
+
+Esse é muito interessante para o seu objetivo.
+
+Você não quer usar IA apenas para desenvolver. Também pode usar IA **dentro do sistema**.
+
+## Possíveis usos de IA no sistema
+
+* Sugerir descrição do problema a partir de fotos
+* Gerar resumo da ordem de serviço
+* Sugerir serviços com base no tipo de produto
+* Classificar item: sapato, bolsa, mala, jaqueta, mochila
+* Criar mensagem automática para cliente
+* Gerar orçamento preliminar
+* Resumir histórico do cliente
+* Detectar atraso em serviços
+* Sugerir prioridade operacional
+* Criar textos de comprovante
+* Gerar resposta para WhatsApp
+* Criar relatório gerencial em linguagem natural
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de IA e Automação do projeto Sapataria.
+
+Sua função é identificar, projetar e especificar usos práticos de inteligência artificial dentro de um Sistema Web para sapataria/oficina de consertos e restauração.
+
+O foco é gerar valor real para a operação, sem criar complexidade desnecessária.
+
+Você deve analisar oportunidades como:
+1. Geração de descrições.
+2. Classificação de produtos.
+3. Sugestão de serviços.
+4. Apoio a orçamentos.
+5. Mensagens automáticas para clientes.
+6. Resumos de ordens de serviço.
+7. Análise de fotos.
+8. Alertas operacionais.
+9. Relatórios inteligentes.
+10. Atendimento via WhatsApp.
+
+Para cada ideia, indique valor, dificuldade, riscos, dados necessários, custo estimado e prioridade.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Liste oportunidades reais de uso de IA no Sistema Web da Sapataria, separando o que deve entrar no MVP, o que pode ficar para fase 2 e o que deve ser evitado inicialmente.
+```
+
+---
+
+# 12. Agente 9 — Testes e Qualidade
+
+Esse agente evita que o sistema vire um amontoado de funcionalidades frágeis.
+
+## Função
+
+Criar plano de testes, cenários, casos de borda e critérios de aceite.
+
+## Responsabilidades
+
+* Testes unitários
+* Testes de integração
+* Testes end-to-end
+* Testes manuais
+* Casos de erro
+* Dados de teste
+* Regressão
+* Checklist por módulo
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de Testes e Qualidade do projeto Sapataria.
+
+Sua função é garantir a qualidade funcional, técnica e operacional de um Sistema Web para gestão de sapataria/oficina.
+
+Você deve criar cenários de teste, casos de borda, critérios de aceite e estratégias para prevenir regressões.
+
+Considere:
+1. Cadastro de clientes.
+2. Criação de ordem de serviço.
+3. Orçamento.
+4. Aprovação do cliente.
+5. Execução do serviço.
+6. Pagamentos.
+7. Entrega.
+8. Fotos.
+9. Permissões.
+10. Relatórios.
+11. Validações.
+12. Segurança básica.
+
+Seja rigoroso. Procure falhas antes que o usuário final encontre.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Crie um plano de testes completo para o fluxo principal: cadastrar cliente, registrar item, abrir ordem de serviço, gerar orçamento, aprovar orçamento, registrar pagamento e entregar produto.
+```
+
+---
+
+# 13. Agente 10 — Segurança e LGPD
+
+Esse agente é indispensável.
+
+O sistema vai guardar dados pessoais de clientes, telefones, endereços, fotos de produtos e possivelmente histórico financeiro.
+
+## Função
+
+Revisar segurança, permissões, privacidade e riscos.
+
+## Pontos críticos
+
+* Login seguro
+* Senhas com hash
+* Controle de acesso por perfil
+* Auditoria
+* Proteção de fotos
+* Dados pessoais
+* Consentimento para comunicação
+* Exclusão/anonimização
+* Backup
+* Logs sem dados sensíveis
+* Proteção contra acesso indevido
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de Segurança e LGPD do projeto Sapataria.
+
+Sua função é revisar o Sistema Web da Sapataria sob a ótica de segurança da informação, privacidade e proteção de dados pessoais.
+
+O sistema armazenará clientes, contatos, produtos recebidos, fotos, ordens de serviço, pagamentos e histórico operacional.
+
+Você deve analisar:
+1. Autenticação.
+2. Autorização.
+3. Perfis de acesso.
+4. Proteção de dados pessoais.
+5. Segurança de fotos e anexos.
+6. Auditoria.
+7. Logs.
+8. Backups.
+9. LGPD.
+10. Riscos de vazamento.
+11. Boas práticas de API.
+12. Segurança no frontend e backend.
+
+Sempre aponte riscos, impacto, probabilidade e recomendação prática.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Faça uma análise inicial de riscos de segurança e LGPD para o Sistema Web da Sapataria, propondo medidas obrigatórias para o MVP.
+```
+
+---
+
+# 14. Agente 11 — DevOps e Deploy
+
+Esse agente cuida de colocar o sistema no ar.
+
+## Função
+
+Planejar ambientes, deploy, versionamento e infraestrutura.
+
+## Responsabilidades
+
+* Ambiente local
+* Ambiente de homologação
+* Ambiente de produção
+* Docker
+* Banco de dados
+* Storage de imagens
+* Backup
+* CI/CD
+* Logs
+* Monitoramento
+* Variáveis de ambiente
+* Rollback
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente DevOps do projeto Sapataria.
+
+Sua função é planejar e orientar a infraestrutura, deploy, ambientes e operação técnica de um Sistema Web moderno para uma sapataria/oficina.
+
+Considere:
+1. Ambiente local.
+2. Ambiente de homologação.
+3. Ambiente de produção.
+4. Docker.
+5. Banco PostgreSQL.
+6. Storage para fotos.
+7. Backup.
+8. Logs.
+9. Monitoramento.
+10. CI/CD.
+11. Variáveis de ambiente.
+12. Segurança operacional.
+13. Custo mensal.
+
+Você deve propor soluções simples, econômicas e confiáveis.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Proponha uma estratégia de deploy simples e econômica para o Sistema Web da Sapataria, considerando frontend, backend, banco de dados PostgreSQL, armazenamento de fotos, backup e ambiente de homologação.
+```
+
+---
+
+# 15. Agente 12 — Documentação
+
+Esse agente mantém o conhecimento organizado.
+
+## Função
+
+Transformar decisões e implementações em documentação clara.
+
+## Documentos importantes
+
+* Visão do produto
+* Escopo do MVP
+* Regras de negócio
+* Modelo de dados
+* Contratos de API
+* Manual do usuário
+* Guia de instalação
+* Guia de deploy
+* Guia de contribuição
+* Changelog
+
+## Prompt inicial sugerido
+
+```text
+Você é o Agente de Documentação do projeto Sapataria.
+
+Sua função é organizar toda a documentação funcional, técnica e operacional do Sistema Web da Sapataria.
+
+Você deve transformar decisões, requisitos, fluxos, modelos, APIs, telas e instruções em documentos claros, versionáveis e úteis para desenvolvimento e manutenção.
+
+Sempre que receber conteúdo bruto, você deve:
+1. Organizar.
+2. Padronizar.
+3. Corrigir inconsistências.
+4. Criar estrutura de documentação.
+5. Sugerir lacunas.
+6. Gerar documentos prontos para uso.
+
+Use linguagem clara, objetiva e profissional.
+```
+
+## Primeiro pedido para esse agente
+
+```text
+Crie a estrutura inicial de documentação do projeto Sapataria, separando documentos funcionais, técnicos, operacionais e de usuário.
+```
+
+---
+
+# 16. Como organizar os chats dentro do projeto
+
+Dentro do projeto ChatGPT, eu sugiro criar chats com nomes padronizados.
+
+## Estrutura recomendada
+
+```text
+00 - Orquestrador Geral
+01 - Produto e Requisitos
+02 - UX UI e Fluxos
+03 - Arquitetura Técnica
+04 - Banco de Dados
+05 - Backend
+06 - Frontend
+07 - IA e Automação
+08 - Testes e QA
+09 - Segurança e LGPD
+10 - DevOps e Deploy
+11 - Documentação
+12 - Decisões e ADRs
+13 - Ideias Futuras
+```
+
+O chat **00 - Orquestrador Geral** deve ser o principal.
+
+Este chat atual pode se tornar o **00 - Orquestrador Geral**.
+
+---
+
+# 17. Como os agentes devem trabalhar juntos
+
+Um erro comum é conversar com vários agentes sem sincronizar as decisões. Isso cria caos.
+
+Use este fluxo:
+
+```text
+Produto define necessidade
+↓
+UX transforma em fluxo/tela
+↓
+Banco modela dados
+↓
+Arquitetura valida padrão técnico
+↓
+Backend define API
+↓
+Frontend implementa interface
+↓
+QA cria testes
+↓
+Segurança revisa riscos
+↓
+Documentação registra
+↓
+Orquestrador consolida tudo
+```
+
+Exemplo prático:
+
+## Funcionalidade: Ordem de Serviço
+
+1. **Produto**
+
+   * Define o que é uma OS.
+   * Define status.
+   * Define regras de aprovação.
+   * Define campos obrigatórios.
+
+2. **UX/UI**
+
+   * Desenha a tela de criação da OS.
+   * Define fluxo de fotos.
+   * Define tela de orçamento.
+
+3. **Banco**
+
+   * Cria entidades ServiceOrder, ServiceOrderItem, Photo, Quote, Payment.
+
+4. **Backend**
+
+   * Cria endpoints.
+   * Define validações.
+   * Implementa regras de status.
+
+5. **Frontend**
+
+   * Cria formulários.
+   * Cria listagem.
+   * Cria tela de detalhes.
+
+6. **QA**
+
+   * Testa criação, edição, aprovação, pagamento e entrega.
+
+7. **Segurança**
+
+   * Garante que somente perfis autorizados possam alterar preço, aprovar entrega ou ver dados sensíveis.
+
+8. **Documentação**
+
+   * Registra tudo.
+
+9. **Orquestrador**
+
+   * Consolida e aponta pendências.
+
+---
+
+# 18. Artefatos que você deve pedir para cada agente
+
+Para evitar conversas vagas, sempre peça artefatos concretos.
+
+## Produto
+
+Peça:
+
+```text
+Gere user stories com critérios de aceite.
+```
+
+## UX
+
+Peça:
+
+```text
+Gere o fluxo textual da tela, campos, botões, estados e validações.
+```
+
+## Arquitetura
+
+Peça:
+
+```text
+Gere um ADR com a decisão técnica, contexto, opções, decisão e consequências.
+```
+
+## Banco
+
+Peça:
+
+```text
+Gere o modelo lógico com entidades, campos, tipos, constraints e relacionamentos.
+```
+
+## Backend
+
+Peça:
+
+```text
+Gere contratos REST com request, response, status codes e regras de erro.
+```
+
+## Frontend
+
+Peça:
+
+```text
+Gere a estrutura de componentes, rotas e estados da tela.
+```
+
+## QA
+
+Peça:
+
+```text
+Gere cenários de teste positivos, negativos e casos de borda.
+```
+
+## Segurança
+
+Peça:
+
+```text
+Gere uma matriz de riscos com impacto, probabilidade e mitigação.
+```
+
+## DevOps
+
+Peça:
+
+```text
+Gere o plano de ambientes, deploy, backup e rollback.
+```
+
+## Documentação
+
+Peça:
+
+```text
+Gere documentação em Markdown pronta para versionar no repositório.
+```
+
+---
+
+# 19. Regras de ouro para usar IA no desenvolvimento
+
+Aqui vai a parte importante: IA acelera muito, mas também pode gerar bagunça muito rápido.
+
+Use estas regras:
+
+## Regra 1 — Um agente, uma responsabilidade
+
+Não peça para o agente Backend decidir regras de negócio complexas sozinho.
+
+Ele pode sugerir, mas quem valida é o agente de Produto ou você.
+
+---
+
+## Regra 2 — Toda decisão importante vira documento
+
+Exemplos:
+
+* Stack escolhida
+* Banco escolhido
+* Estratégia de autenticação
+* Modelo de status da OS
+* Forma de armazenar fotos
+* Estratégia de pagamento
+* Deploy
+
+Use ADRs.
+
+ADR significa **Architecture Decision Record**.
+
+Modelo:
+
+```markdown
+# ADR-001 - Escolha da Stack Principal
+
+## Contexto
+
+## Opções consideradas
+
+## Decisão
+
+## Consequências positivas
+
+## Consequências negativas
+
+## Data
+```
+
+---
+
+## Regra 3 — Não gere código antes de estabilizar o fluxo
+
+Para a funcionalidade principal, primeiro defina:
+
+1. Regras de negócio
+2. Fluxo de usuário
+3. Modelo de dados
+4. Contratos de API
+5. Só depois o código
+
+Esse cuidado economiza retrabalho.
+
+---
+
+## Regra 4 — Peça sempre critérios de aceite
+
+Uma user story sem critério de aceite vira interpretação livre.
+
+Exemplo:
+
+```text
+Como atendente,
+quero criar uma ordem de serviço para um cliente,
+para registrar um produto recebido para conserto.
+
+Critérios de aceite:
+1. Deve ser possível selecionar cliente existente.
+2. Deve ser possível cadastrar novo cliente durante o fluxo.
+3. Deve ser obrigatório informar categoria do produto.
+4. Deve ser possível adicionar fotos.
+5. Deve ser possível informar serviços solicitados.
+6. Deve ser possível gerar orçamento inicial.
+7. Deve gerar número único de OS.
+```
+
+---
+
+## Regra 5 — Sempre peça casos de borda
+
+Exemplos:
+
+* Cliente sem telefone
+* Produto sem foto
+* OS criada sem orçamento
+* Orçamento rejeitado
+* Pagamento parcial
+* Serviço atrasado
+* Produto entregue sem pagamento total
+* Cliente esqueceu de buscar
+* Usuário sem permissão tentando alterar preço
+* Foto muito grande
+* Conexão perdida durante upload
+
+---
+
+# 20. MVP recomendado
+
+Para começar com inteligência, eu recomendo um MVP enxuto, mas útil.
+
+## MVP funcional
+
+### Módulo 1 — Usuários e acesso
+
+* Login
+* Perfis
+* Permissões básicas
+
+Perfis iniciais:
+
+* Administrador
+* Atendente
+* Técnico
+
+---
+
+### Módulo 2 — Clientes
+
+* Cadastro
+* Consulta
+* Edição
+* Histórico do cliente
+
+Campos iniciais:
+
+* Nome
+* Telefone
+* WhatsApp
+* E-mail
+* CPF opcional
+* Observações
+
+---
+
+### Módulo 3 — Ordens de Serviço
+
+Este é o coração do sistema.
+
+Funcionalidades:
+
+* Criar OS
+* Vincular cliente
+* Registrar item
+* Categoria do produto
+* Descrição do problema
+* Fotos
+* Serviços solicitados
+* Prazo previsto
+* Status
+* Observações internas
+
+---
+
+### Módulo 4 — Orçamentos
+
+* Criar orçamento
+* Adicionar serviços e valores
+* Dar desconto
+* Aprovar ou rejeitar
+* Registrar data da aprovação
+
+---
+
+### Módulo 5 — Pagamentos
+
+* Registrar pagamento
+* Forma de pagamento
+* Pagamento parcial
+* Saldo restante
+* Status financeiro
+
+---
+
+### Módulo 6 — Entrega
+
+* Marcar como pronto
+* Registrar entrega
+* Validar pagamento
+* Gerar comprovante simples
+
+---
+
+### Módulo 7 — Dashboard básico
+
+Indicadores:
+
+* OS abertas
+* OS em andamento
+* OS prontas
+* OS atrasadas
+* Valor a receber
+* Faturamento do mês
+
+---
+
+# 21. Status recomendados para Ordem de Serviço
+
+Sugestão inicial:
+
+```text
+RASCUNHO
+RECEBIDA
+AGUARDANDO_ORCAMENTO
+ORCAMENTO_ENVIADO
+AGUARDANDO_APROVACAO
+APROVADA
+REJEITADA
+EM_EXECUCAO
+AGUARDANDO_PECA
+PRONTA
+AGUARDANDO_RETIRADA
+ENTREGUE
+CANCELADA
+```
+
+Mas para o MVP, talvez seja melhor simplificar:
+
+```text
+RECEBIDA
+AGUARDANDO_ORCAMENTO
+AGUARDANDO_APROVACAO
+APROVADA
+EM_EXECUCAO
+PRONTA
+ENTREGUE
+CANCELADA
+```
+
+Minha opinião: **comece com o fluxo simplificado**. Status demais no início atrapalham a operação e aumentam bugs.
+
+---
+
+# 22. Modelo mental do sistema
+
+O sistema pode girar em torno desta sequência:
+
+```text
+Cliente
+↓
+Produto recebido
+↓
+Ordem de serviço
+↓
+Orçamento
+↓
+Aprovação
+↓
+Execução
+↓
+Pagamento
+↓
+Entrega
+```
+
+Essa sequência deve orientar produto, banco, API, UX e testes.
+
+---
+
+# 23. Backlog inicial sugerido
+
+## Épico 1 — Fundação
+
+* Definir stack
+* Criar repositório
+* Criar arquitetura inicial
+* Configurar banco
+* Configurar autenticação
+* Criar layout base
+
+## Épico 2 — Clientes
+
+* Criar cliente
+* Listar clientes
+* Editar cliente
+* Buscar cliente
+* Ver histórico
+
+## Épico 3 — Ordens de Serviço
+
+* Criar OS
+* Listar OS
+* Ver detalhes
+* Alterar status
+* Adicionar observações
+* Adicionar fotos
+
+## Épico 4 — Orçamento
+
+* Criar orçamento
+* Adicionar itens
+* Aprovar orçamento
+* Rejeitar orçamento
+* Calcular total
+
+## Épico 5 — Pagamento
+
+* Registrar pagamento
+* Controlar saldo
+* Exibir status financeiro
+
+## Épico 6 — Entrega
+
+* Marcar OS como pronta
+* Registrar entrega
+* Gerar comprovante
+
+## Épico 7 — Dashboard
+
+* Indicadores principais
+* Filtros por período
+* Alertas de atraso
+
+---
+
+# 24. Como usar este chat daqui para frente
+
+Minha sugestão: transforme este chat no **Agente Orquestrador Geral**.
+
+Quando você criar outros chats, traga para cá os resumos importantes.
+
+Exemplo:
+
+```text
+O Agente de Produto definiu estes status para a Ordem de Serviço:
+[cole aqui]
+
+Analise se estão coerentes com o MVP e diga impactos em banco, backend, frontend, QA e documentação.
+```
+
+Ou:
+
+```text
+O Agente de Banco propôs este modelo:
+[cole aqui]
+
+Revise como Orquestrador Geral e aponte inconsistências, riscos e próximos passos.
+```
+
+---
+
+# 25. Primeiro conjunto de chats que eu criaria agora
+
+Não crie os 13 chats de uma vez se isso te deixar disperso.
+
+Comece com estes 5:
+
+```text
+00 - Orquestrador Geral
+01 - Produto e Requisitos
+02 - Arquitetura Técnica
+03 - Banco de Dados
+04 - UX UI e Fluxos
+```
+
+Depois que esses estiverem maduros, crie:
+
+```text
+05 - Backend
+06 - Frontend
+07 - Testes e QA
+08 - Segurança e LGPD
+09 - DevOps e Deploy
+10 - Documentação
+```
+
+---
+
+# 26. Sequência prática para você executar agora
+
+Eu seguiria esta ordem:
+
+## Passo 1
+
+Neste chat, defina que ele será o Orquestrador Geral.
+
+Use:
+
+```text
+A partir de agora, este chat será o Agente Orquestrador Geral do projeto Sapataria. Sua função será consolidar decisões, organizar o roadmap, revisar artefatos dos demais agentes e manter coerência geral do projeto.
+```
+
+## Passo 2
+
+Crie o chat:
+
+```text
+01 - Produto e Requisitos
+```
+
+Cole o prompt do Agente de Produto.
+
+Depois peça:
+
+```text
+Crie a primeira versão do documento de visão do produto, com módulos principais, perfis de usuário, jornadas, regras de negócio iniciais e proposta de MVP para o Sistema Web da Sapataria.
+```
+
+## Passo 3
+
+Traga o resultado para este chat e diga:
+
+```text
+Revise este documento do Agente de Produto como Orquestrador Geral. Aponte inconsistências, riscos, lacunas e próximos passos.
+```
+
+## Passo 4
+
+Crie o chat:
+
+```text
+02 - Arquitetura Técnica
+```
+
+Cole o prompt do Agente de Arquitetura.
+
+Depois peça:
+
+```text
+Proponha 3 arquiteturas possíveis para o Sistema Web da Sapataria: OutSystems, TypeScript moderno e .NET. Compare velocidade, custo, manutenção, escalabilidade e adequação ao projeto.
+```
+
+## Passo 5
+
+Traga a resposta para cá e peça revisão.
+
+---
+
+# 27. Minha recomendação técnica inicial
+
+Como você é Desenvolvedor Sênior OutSystems, eu não descartaria OutSystems.
+
+Mas eu avaliaria com calma:
+
+## Se o objetivo é entregar rápido para uma operação real
+
+OutSystems pode ser excelente.
+
+## Se o objetivo é criar um produto SaaS próprio, com controle de custo e código
+
+Eu consideraria:
+
+```text
+Next.js + NestJS + PostgreSQL + Prisma + S3 compatível
+```
+
+Ou:
+
+```text
+Next.js + .NET Web API + PostgreSQL + Entity Framework
+```
+
+## Minha inclinação inicial
+
+Para um produto moderno, evolutivo e com boa ajuda de IA no desenvolvimento, eu tenderia a:
+
+```text
+Frontend: Next.js + TypeScript
+Backend: NestJS + TypeScript
+Banco: PostgreSQL
+ORM: Prisma
+Storage: S3 compatível
+Auth: Auth.js ou implementação JWT bem estruturada
+Deploy: Docker
+```
+
+Mas se você quiser aproveitar sua força em OutSystems e entregar rápido, o caminho low-code pode ser mais eficiente no curto prazo.
+
+A decisão certa depende de uma pergunta:
+
+> Você quer criar um sistema para uma sapataria específica ou um produto que possa virar SaaS para várias sapatarias/oficinas?
+
+Essa resposta muda bastante a arquitetura.
+
+---
+
+# 28. Prompt mestre para este chat
+
+Você pode usar este texto agora mesmo para oficializar este chat como o centro do projeto:
+
+```text
+A partir de agora, este chat será o Agente Orquestrador Geral do projeto Sapataria.
+
+O projeto consiste no desenvolvimento de um Sistema Web moderno para uma sapataria/oficina que renova e conserta bolsas, malas, sapatos, tênis, sandálias, mochilas, jaquetas e diversos outros produtos.
+
+A função deste agente é:
+1. Consolidar decisões dos demais agentes.
+2. Manter coerência entre produto, UX, arquitetura, banco, backend, frontend, segurança, testes, DevOps e documentação.
+3. Criar roadmap.
+4. Priorizar entregas.
+5. Identificar lacunas, riscos e inconsistências.
+6. Sugerir próximos passos.
+7. Revisar artefatos técnicos e funcionais.
+8. Manter foco em um MVP viável.
+9. Evitar complexidade desnecessária.
+10. Garantir que o projeto evolua de forma profissional.
+
+Sempre que eu colar respostas de outros agentes, revise criticamente, organize, corrija inconsistências e proponha ações concretas.
+```
+
+---
+
+# 29. Prompt padrão para revisar respostas de outros agentes
+
+Quando trouxer uma resposta de outro chat para cá, use:
+
+```text
+Revise o artefato abaixo como Agente Orquestrador Geral do projeto Sapataria.
+
+Quero que você:
+1. Resuma as principais decisões.
+2. Aponte inconsistências.
+3. Aponte riscos.
+4. Identifique lacunas.
+5. Avalie impacto em produto, UX, banco, backend, frontend, QA, segurança e documentação.
+6. Sugira próximos passos.
+7. Diga se o artefato está aprovado, aprovado com ressalvas ou reprovado.
+
+Artefato:
+[cole aqui]
+```
+
+---
+
+# 30. Próxima melhor ação
+
+A melhor próxima ação é você **criar o chat 01 - Produto e Requisitos** e gerar o primeiro documento de visão do produto.
+
+Depois traga esse documento para cá.
+
+A partir daí, eu consigo atuar como seu **Orquestrador Geral**, revisando com rigor e mantendo o projeto no trilho.
