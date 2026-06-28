@@ -4,12 +4,13 @@
   "description": "API backend do Sistema Web da Sapataria (NestJS)",
   "private": true,
   "scripts": {
-    "dev": "nest start --watch",
+    "dev": "nest start --watch --preserveWatchOutput",
     "build": "nest build",
     "start": "node dist/main",
     "lint": "eslint src",
     "test": "echo \"No tests yet\" && exit 0",
     "prisma:generate": "prisma generate",
+    "prisma:validate": "prisma validate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:studio": "prisma studio"
   },
@@ -19,6 +20,7 @@
     "@nestjs/core": "^10.4.15",
     "@nestjs/platform-express": "^10.4.15",
     "@prisma/client": "^6.9.0",
+    "@sapataria/shared": "workspace:*",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2"
   },
