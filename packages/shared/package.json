@@ -1,0 +1,16 @@
+{
+  "name": "@sapataria/shared",
+  "version": "0.1.0",
+  "description": "Tipos e utilitários compartilhados do Sistema Web da Sapataria",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "lint": "eslint src",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

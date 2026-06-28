@@ -1,0 +1,25 @@
+// =============================================================================
+// Prisma Schema — Sistema Web da Sapataria
+// Bootstrap inicial: apenas datasource e generator.
+// Models de negócio serão adicionados em sprints futuros.
+// Não adicionar models aqui durante a fase de bootstrap.
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------------------------------------------------------------
+// Models de negócio serão adicionados aqui em fases futuras:
+//   - Cliente
+//   - OrdemDeServico
+//   - Item
+//   - Servico
+//   - Pagamento
+//   etc.
+// ----------------------------------------------------------------------------
