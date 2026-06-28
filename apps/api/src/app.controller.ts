@@ -3,7 +3,9 @@ import { AppService } from './app.service';
 
 /**
  * Controller raiz da API.
- * Rota: GET /api/health
+ * Rotas:
+ *   GET /api/health    — verifica status da API
+ *   GET /api/health/db — verifica status da conexão com o banco de dados
  */
 @Controller('health')
 export class AppController {
@@ -12,5 +14,10 @@ export class AppController {
   @Get()
   getHealth() {
     return this.appService.getHealth();
+  }
+
+  @Get('db')
+  async getDbHealth() {
+    return this.appService.getDbHealth();
   }
 }

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -15,8 +16,14 @@ import { AppService } from './app.service';
       isGlobal: true,
       envFilePath: ['../../.env', '.env'],
     }),
+    /**
+     * PrismaModule disponibiliza o PrismaService para a camada de controllers/services.
+     * Bootstrap: usado apenas para health check de conexão com o banco nesta fase.
+     */
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
