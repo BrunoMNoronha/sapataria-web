@@ -5,8 +5,8 @@ export default function Home() {
         <span className="home__badge">Bootstrap técnico</span>
         <h1 className="home__title">Sistema Web da Sapataria</h1>
         <p className="home__subtitle">
-          A aplicação está sendo configurada. Os módulos de negócio serão
-          implementados nas próximas fases do projeto.
+          A aplicação está sendo configurada. Os módulos de negócio serão implementados nas próximas
+          fases do projeto.
         </p>
         <div className="home__links">
           <a

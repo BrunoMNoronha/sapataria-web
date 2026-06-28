@@ -10,11 +10,7 @@ export const metadata: Metadata = {
     'Sistema de controle operacional da Sapataria — gestão de clientes, ordens de serviço, produção e entrega.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
       <body className={inter.className}>{children}</body>
